@@ -1,0 +1,38 @@
+steps:
+  # コンテナイメージのビルド
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "build",
+        "--build-arg",
+        "_AUTH0_DOMAIN=${_AUTH0_DOMAIN}",
+        "--build-arg",
+        "_AUTH0_CLIENT_ID=${_AUTH0_CLIENT_ID}",
+        "--build-arg",
+        "_AUTH0_AUDIENCE=${_AUTH0_AUDIENCE}",
+        "--build-arg",
+        "_AUTH0_CUSTOM_CLAIM_NAMESPACE=${_AUTH0_CUSTOM_CLAIM_NAMESPACE}",
+        "--build-arg",
+        "_GCP_PROJECT_ID=${_GCP_PROJECT_ID}",
+        "-t",
+        "gcr.io/${_GCP_PROJECT_ID}/nuxt3-auth0",
+        ".",
+      ]
+  # Container Registry へ PUSH
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/${_GCP_PROJECT_ID}/nuxt3-auth0"]
+  # Cloud Run へデプロイ
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      [
+        "run",
+        "deploy",
+        "nuxt3-auth0",
+        "--image",
+        "gcr.io/${_GCP_PROJECT_ID}/nuxt3-auth0",
+        "--region",
+        "asia-northeast1",
+      ]
+images:
+  - gcr.io/${_GCP_PROJECT_ID}/nuxt3-auth0

@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint --ext \".js,.vue,.ts\" --ignore-path .gitignore ."
+  },
+  "devDependencies": {
+    "@nuxtjs/eslint-config-typescript": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-nuxt": "^3.2.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "nuxt": "^3.0.0-rc.9",
+    "prettier": "^2.7.1",
+    "sass": "^1.54.0",
+    "vue-tsc": "^0.40.6"
+  },
+  "dependencies": {
+    "@auth0/auth0-spa-js": "^1.22.2",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^2.1.4"
+  }
+}
